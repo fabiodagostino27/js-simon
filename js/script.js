@@ -1,7 +1,13 @@
 let countdown = document.getElementById("countdown");
-let counter = 30;
+let counter = 1;
 let numbersList = document.getElementById("numbers-list");
 let randomArr = [];
+let answersForm = document.getElementById("answers-form");
+let numbers = document.getElementsByClassName("form-control");
+let btn = document.querySelector(".btn");
+let message = document.getElementById("message")
+let rightAnswers = 0;
+let rightArr = []
 
 function randomNumberGroup(arr) {
     for (let i = 0; i <= 4; i++) {
@@ -14,11 +20,30 @@ function randomNumberGroup(arr) {
 
 numbersList.innerHTML = randomNumberGroup(randomArr)
 
+
 let interval = setInterval(function(){
     counter--;
     countdown.innerHTML = counter;
 
     if (counter == 0) {
-        clearInterval(interval)
+        clearInterval(interval);
+        numbersList.classList.replace("d-flex", "d-none");
+        answersForm.classList.replace("d-none", "d-block")
     }
 }, 1000)
+
+btn.addEventListener("click", function(event) {
+    event.preventDefault();
+    
+
+    for (i = 0; i < randomArr.length; i++) {
+        for (k = 0; k < randomArr.length; k++) {
+            if (numbers[i].value == randomArr[k]) {
+                rightAnswers++;
+                rightArr.push(numbers[i].value)
+            }
+        }
+    }
+
+    message.innerHTML = rightArr
+})
