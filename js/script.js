@@ -9,16 +9,20 @@ let message = document.getElementById("message");
 let rightAnswers = 0;
 let rightArr = [];
 
-function randomNumberGroup(arr) {
-    for (let i = 0; i <= 4; i++) {
-        arr.push(Math.floor(Math.random() * 50) + 1);
-    }
-
-    return arr;
+function randomNumber(min, max) {
+    return Math.floor(Math.random() * max) + min;
 }
 
 
-numbersList.innerHTML = randomNumberGroup(randomArr);
+for (i = 0; randomArr.length < 5; i++){
+    let randomNum = randomNumber(1, 50)
+
+    if (!randomArr.includes(randomNum)) {
+        randomArr.push(randomNum)
+    }
+}
+
+numbersList.innerHTML = randomArr;
 
 
 let interval = setInterval(function(){
